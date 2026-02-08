@@ -1,0 +1,2314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vipedits | Professional Photo & Video Editing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== BASE STYLES ===== */
+        :root {
+            --primary: #ff6b6b;
+            --primary-dark: #ee5a52;
+            --secondary: #4ecdc4;
+            --dark: #1a1a2e;
+            --light: #ffffff;
+            --gray: #666666;
+            --card-bg: #f8f9fa;
+            --text: #333333;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --footer-bg: #1a1a2e;
+            --footer-text: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            flex: 1;
+        }
+
+        /* ===== VERTICAL MENU ===== */
+        .vertical-menu {
+            width: 280px;
+            background: white;
+            padding: 30px 20px;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.1);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            object-fit: contain;
+            border: 3px solid var(--primary);
+            padding: 5px;
+            background: white;
+        }
+
+        .logo h1 {
+            color: var(--primary);
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .logo .whatsapp-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .nav-links li {
+            margin-bottom: 10px;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .nav-icon {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .quick-contact {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .quick-contact h3 {
+            color: var(--primary);
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .contact-item:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.2);
+        }
+
+        .contact-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-text h4 {
+            font-size: 13px;
+            color: var(--gray);
+            margin-bottom: 2px;
+        }
+
+        .contact-text p {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        /* ===== MOBILE MENU BAR ===== */
+        .mobile-menu-bar {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            z-index: 999;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mobile-logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: contain;
+            border: 2px solid var(--primary);
+        }
+
+        .mobile-logo h1 {
+            color: var(--primary);
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .mobile-menu-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px var(--shadow);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: contain;
+            border: 3px solid var(--primary);
+            padding: 5px;
+            background: white;
+        }
+
+        .header-text h2 {
+            color: var(--primary);
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header-text p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header-btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .header-btn.whatsapp {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .header-btn.whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .header-btn.call {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .header-btn.call:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== PRICING SECTIONS ===== */
+        .pricing-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+        }
+
+        .section-title h3 {
+            font-size: 22px;
+            color: var(--text);
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 14px;
+            margin-left: 65px;
+            margin-top: -15px;
+            margin-bottom: 20px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .price {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray);
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            color: var(--primary);
+        }
+
+        .order-btn {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .order-btn:hover {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* ===== WHATSAPP ORDER FORM ===== */
+        .whatsapp-order {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px var(--shadow);
+            margin: 40px 0;
+            border: 2px dashed var(--primary);
+        }
+
+        .whatsapp-order h3 {
+            color: var(--primary);
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .whatsapp-order p {
+            color: var(--gray);
+            margin-bottom: 25px;
+        }
+
+        .order-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            font-family: inherit;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            grid-column: 1 / -1;
+            padding: 18px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        /* ===== FOUNDER SECTION ===== */
+        .founder-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px var(--shadow);
+            margin: 40px 0;
+        }
+
+        .founder-section h3 {
+            color: var(--primary);
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .founder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .founder-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .founder-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .founder-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary);
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .founder-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .founder-role {
+            color: var(--gray);
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .founder-bio {
+            color: var(--text);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .founder-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .founder-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            color: var(--text);
+        }
+
+        .founder-contact-item i {
+            color: var(--primary);
+        }
+
+        /* ===== PREVIOUS WORK SECTION ===== */
+        .previous-work-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px var(--shadow);
+            margin: 40px 0;
+        }
+
+        .previous-work-section h3 {
+            color: var(--primary);
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .work-category-title {
+            font-size: 22px;
+            color: var(--primary);
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .work-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .work-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.2);
+        }
+
+        .work-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .work-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Video Player Styles */
+        .video-container {
+            width: 100%;
+            height: 250px;
+            position: relative;
+            background: #000;
+        }
+
+        .video-player {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-container:hover .video-controls {
+            opacity: 1;
+        }
+
+        .video-play-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .video-play-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .video-time {
+            color: white;
+            font-size: 12px;
+            margin-left: auto;
+        }
+
+        .video-volume {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .volume-slider {
+            width: 60px;
+        }
+
+        .video-fullscreen {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Image Modal Styles */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-modal.active {
+            display: flex;
+        }
+
+        /* Video Modal Styles */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+
+        .modal-video {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            border-radius: 10px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002;
+        }
+
+        .work-info {
+            padding: 20px;
+        }
+
+        .work-category {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .work-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .work-description {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .work-view-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .work-view-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== FULL WIDTH FOOTER ===== */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            margin-top: auto;
+            width: 100%;
+            padding: 50px 0 30px;
+        }
+
+        .footer-wrapper {
+            width: calc(100% - 280px);
+            margin-left: 280px;
+            padding: 0 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h4 {
+            color: var(--primary);
+            font-size: 18px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 107, 107, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .contact-details {
+            color: #cbd5e0;
+            font-size: 14px;
+        }
+
+        .contact-details p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0aec0;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        .copyright {
+            margin-bottom: 10px;
+        }
+
+        .copyright a {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .copyright a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== NOTIFICATION ===== */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            .vertical-menu {
+                width: 250px;
+            }
+            .main-content {
+                margin-left: 250px;
+            }
+            .footer-wrapper {
+                width: calc(100% - 250px);
+                margin-left: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-bar {
+                display: flex;
+            }
+            
+            .vertical-menu {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 998;
+                top: 80px;
+                height: calc(100vh - 80px);
+            }
+            
+            .vertical-menu.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+                margin-top: 100px;
+            }
+            
+            .footer-wrapper {
+                width: 100%;
+                margin-left: 0;
+                padding: 0 20px;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .order-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .founder-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .section-title {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .section-subtitle {
+                margin-left: 0;
+                text-align: center;
+            }
+            
+            .footer-wrapper {
+                padding: 0 15px;
+            }
+            
+            .mobile-logo h1 {
+                font-size: 18px;
+            }
+            
+            .mobile-menu-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            .founder-photo {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .work-category-title {
+                font-size: 18px;
+            }
+            
+            .video-controls {
+                padding: 5px;
+            }
+            
+            .video-play-btn {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .volume-slider {
+                width: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NOTIFICATION -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText">Copied to clipboard!</span>
+    </div>
+
+    <!-- IMAGE MODAL -->
+    <div class="image-modal" id="imageModal">
+        <div class="modal-content">
+            <img src="" alt="Full Size Image" class="modal-image" id="modalImage">
+            <button class="modal-close" id="imageModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- VIDEO MODAL -->
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <video class="modal-video" id="modalVideo" controls>
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <button class="modal-close" id="videoModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- MOBILE MENU BAR -->
+    <div class="mobile-menu-bar">
+        <div class="mobile-logo">
+            <img src="logo.png" alt="vipedits Logo" class="mobile-logo-img">
+            <h1>vipedits</h1>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- VERTICAL MENU -->
+        <nav class="vertical-menu" id="verticalMenu">
+            <div class="logo">
+                <img src="logo.png" alt="vipedits Logo" class="logo-img">
+                <h1>vipedits</h1>
+                <p>Professional Photo & Video Editing</p>
+                <div class="whatsapp-badge">Order Now</div>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#home" class="active">
+                    <i class="fas fa-home nav-icon"></i>
+                    <span>Home</span>
+                </a></li>
+                <li><a href="#pricing">
+                    <i class="fas fa-tags nav-icon"></i>
+                    <span>Pricing</span>
+                </a></li>
+                <li><a href="#order">
+                    <i class="fab fa-whatsapp nav-icon"></i>
+                    <span>WhatsApp Order</span>
+                </a></li>
+                <li><a href="#previous-work">
+                    <i class="fas fa-images nav-icon"></i>
+                    <span>Previous Work</span>
+                </a></li>
+                <li><a href="#founders">
+                    <i class="fas fa-users nav-icon"></i>
+                    <span>Our Team</span>
+                </a></li>
+                <li><a href="#contact">
+                    <i class="fas fa-phone-alt nav-icon"></i>
+                    <span>Contact</span>
+                </a></li>
+            </ul>
+
+            <div class="quick-contact">
+                <h3><i class="fas fa-headset"></i> Quick Contact</h3>
+                <div class="contact-info">
+                    <div class="contact-item" onclick="copyToClipboard('+919894009166')">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>WhatsApp Number</h4>
+                             <h5>Kashif</h5>
+                            <p>+91 98940 09166</p>
+                             <h5>Co-founder</h5>
+                            <p>+91 63743 16098</p>
+                        </div>
+                        <button class="copy-btn">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <div class="contact-item" onclick="copyToClipboard('vipediz15@gmail.com')">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email Address</h4>
+                            <p>vipediz15@gmail.com</p>
+                        </div>
+                        <button class="copy-btn">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <div class="contact-item" onclick="callNumber('+919894009166')">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Call Now</h4>
+                            <p>+91 98940 09166</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- HEADER -->
+            <header class="header" id="home">
+                <div class="header-content">
+                    <img src="logo.png" alt="vipedits Logo" class="header-logo">
+                    <div class="header-text">
+                        <h2>Welcome to vipedits</h2>
+                        <p>Professional Photo & Video Editing Services | WhatsApp: +91 98940 09166</p>
+                    </div>
+                </div>
+                <div class="header-buttons">
+                    <button class="header-btn whatsapp" onclick="openWhatsApp()">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Chat on WhatsApp</span>
+                    </button>
+                    <button class="header-btn call" onclick="callNumber('+919894009166')">
+                        <i class="fas fa-phone"></i>
+                        <span>Call Now</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- PRICING SECTION -->
+            <section class="pricing-section" id="pricing">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Photo Editing Services</h3>
+                </div>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="card-header">
+                            <div class="card-title">Normal Photo Edit</div>
+                            <div class="price">₹30/photo</div>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check feature-icon"></i> Color correction</li>
+                            <li><i class="fas fa-check feature-icon"></i> Basic retouching</li>
+                            <li><i class="fas fa-check feature-icon"></i> Exposure fix</li>
+                            <li><i class="fas fa-check feature-icon"></i> Quick delivery</li>
+                        </ul>
+                        <button class="order-btn" onclick="orderService('Normal Photo Edit', '₹30/photo')">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Order on WhatsApp</span>
+                        </button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="card-header">
+                            <div class="card-title">Frame Edit</div>
+                            <div class="price">₹80/photo</div>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check feature-icon"></i> Custom frames</li>
+                            <li><i class="fas fa-check feature-icon"></i> Artistic borders</li>
+                            <li><i class="fas fa-check feature-icon"></i> Design layouts</li>
+                            <li><i class="fas fa-check feature-icon"></i> Premium quality</li>
+                        </ul>
+                        <button class="order-btn" onclick="orderService('Frame Edit', '₹80/photo')">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Order on WhatsApp</span>
+                        </button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="card-header">
+                            <div class="card-title">Instagram DP & Posts</div>
+                            <div class="price">₹50/image</div>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check feature-icon"></i> Platform sizing</li>
+                            <li><i class="fas fa-check feature-icon"></i> Filters & effects</li>
+                            <li><i class="fas fa-check feature-icon"></i> Story templates</li>
+                            <li><i class="fas fa-check feature-icon"></i> Fast delivery</li>
+                        </ul>
+                        <button class="order-btn" onclick="orderService('Instagram DP & Posts', '₹50/image')">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Order on WhatsApp</span>
+                        </button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="card-header">
+                            <div class="card-title">Animation Edit</div>
+                            <div class="price">₹60/photo</div>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check feature-icon"></i> Motion effects</li>
+                            <li><i class="fas fa-check feature-icon"></i> Cinemagraph style</li>
+                            <li><i class="fas fa-check feature-icon"></i> Loop animations</li>
+                            <li><i class="fas fa-check feature-icon"></i> Social media ready</li>
+                        </ul>
+                        <button class="order-btn" onclick="orderService('Animation Edit', '₹60/photo')">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Order on WhatsApp</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIDEO EDITING PRICES -->
+            <section class="pricing-section">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Video Editing Services</h3>
+                </div>
+                <p class="section-subtitle">Email your details to: vipediz15@gmail.com</p>
+
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="card-header">
+                            <div class="card-title">Wedding Edit</div>
+                            <div class="price">₹80/minute</div>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check feature-icon"></i> Emotional storytelling</li>
+                            <li><i class="fas fa-check feature-icon"></i> Professional transitions</li>
+                            <li><i class="fas fa-check feature-icon"></i> Music sync</li>
+                            <li><i class="fas fa-check feature-icon"></i> 3-5 days delivery</li>
+                        </ul>
+                        <button class="order-btn" onclick="orderService('Wedding Edit', '₹80/minute')">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Order on WhatsApp</span>
+                        </button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="card-header">
+                            <div class="card-title">Creative Edit</div>
+                            <div class="price">₹75/minute</div>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check feature-icon"></i> Dynamic transitions</li>
+                            <li><i class="fas fa-check feature-icon"></i> Trending effects</li>
+                            <li><i class="fas fa-check feature-icon"></i> Text overlays</li>
+                            <li><i class="fas fa-check feature-icon"></i> 3Day delivery</li>
+                        </ul>
+                        <button class="order-btn" onclick="orderService('Creative Edit', '₹75/minute')">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Order on WhatsApp</span>
+                        </button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="card-header">
+                            <div class="card-title">Background Styles</div>
+                            <div class="price">₹60/minute</div>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check feature-icon"></i> Background replacement</li>
+                            <li><i class="fas fa-check feature-icon"></i> Virtual sets</li>
+                            <li><i class="fas fa-check feature-icon"></i> Color grading</li>
+                            <li><i class="fas fa-check feature-icon"></i> Professional finish</li>
+                        </ul>
+                        <button class="order-btn" onclick="orderService('Background Styles', '₹60/minute')">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Order on WhatsApp</span>
+                        </button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="card-header">
+                            <div class="card-title">Logo Edit</div>
+                            <div class="price">₹70/project</div>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check feature-icon"></i> Logo animations</li>
+                            <li><i class="fas fa-check feature-icon"></i> Brand integration</li>
+                            <li><i class="fas fa-check feature-icon"></i> Professional titles</li>
+                            <li><i class="fas fa-check feature-icon"></i> 24-hour delivery</li>
+                        </ul>
+                        <button class="order-btn" onclick="orderService('Logo Edit', '₹70/project')">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Order on WhatsApp</span>
+                        </button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="card-header">
+                            <div class="card-title">Birthday Edit</div>
+                            <div class="price">₹70/minute</div>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check feature-icon"></i> Celebration effects</li>
+                            <li><i class="fas fa-check feature-icon"></i> Party graphics</li>
+                            <li><i class="fas fa-check feature-icon"></i> Name animations</li>
+                            <li><i class="fas fa-check feature-icon"></i> 2Day delivery</li>
+                        </ul>
+                        <button class="order-btn" onclick="orderService('Birthday Edit', '₹70/minute')">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Order on WhatsApp</span>
+                        </button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="card-header">
+                            <div class="card-title">Without Editor Name</div>
+                            <div class="price">₹20 extra</div>
+                        </div>
+                        <ul class="features">
+                            <li><i class="fas fa-check feature-icon"></i> Remove watermark</li>
+                            <li><i class="fas fa-check feature-icon"></i> Clean professional finish</li>
+                            <li><i class="fas fa-check feature-icon"></i> No trace of removal</li>
+                            <li><i class="fas fa-check feature-icon"></i> Add-on service</li>
+                        </ul>
+                        <button class="order-btn" onclick="orderService('Without Editor Name', '₹20 extra')">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Order on WhatsApp</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WHATSAPP ORDER FORM -->
+            <section class="whatsapp-order" id="order">
+                <h3><i class="fab fa-whatsapp"></i> Send Order via WhatsApp</h3>
+                <p>Fill this form and send directly to our WhatsApp number: +91 98940 09166</p>
+                
+                <form class="order-form" id="whatsappOrderForm">
+                    <div class="form-group">
+                        <label for="customerName"><i class="fas fa-user"></i> Your Name</label>
+                        <input type="text" id="customerName" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerPhone"><i class="fas fa-phone"></i> WhatsApp Number</label>
+                        <input type="tel" id="customerPhone" placeholder="Enter your WhatsApp number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="customerEmail" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="serviceType"><i class="fas fa-tag"></i> Service Type</label>
+                        <select id="serviceType" required>
+                            <option value="">Select Service</option>
+                            <option value="Normal Photo Edit">Normal Photo Edit (₹30/photo)</option>
+                            <option value="Frame Edit">Frame Edit (₹80/photo)</option>
+                            <option value="Instagram DP & Posts">Instagram DP & Posts (₹50/image)</option>
+                            <option value="Animation Edit">Animation Edit (₹60/photo)</option>
+                            <option value="Wedding Edit">Wedding Edit (₹80/minute)</option>
+                            <option value="Creative Edit">Creative Edit (₹75/minute)</option>
+                            <option value="Background Styles">Background Styles (₹60/minute)</option>
+                            <option value="Logo Edit">Logo Edit (₹70/project)</option>
+                            <option value="Birthday Edit">Birthday Edit (₹70/minute)</option>
+                            <option value="Without Editor Name">Without Editor Name (₹20 extra)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="orderDetails"><i class="fas fa-edit"></i> Project Details</label>
+                        <textarea id="orderDetails" placeholder="Describe your project requirements, deadlines, special instructions..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Send to WhatsApp</span>
+                    </button>
+                </form>
+            </section>
+
+            <!-- PREVIOUS WORK SECTION -->
+            <section class="previous-work-section" id="previous-work">
+                <h3><i class="fas fa-images"></i> View Our Previous Work</h3>
+                
+                <!-- PHOTO EDITING SAMPLES -->
+                <h4 class="work-category-title">
+                    <i class="fas fa-camera"></i> Photo Editing Samples
+                </h4>
+                <div class="work-grid">
+                    <!-- Photo 1 -->
+                    <div class="work-card">
+                        <img src="instapost.jpeg" alt="Portrait Retouching" class="work-image" onclick="openImageModal('poster.jpeg', 'Professional Portrait Enhancement')">
+                        <div class="work-info">
+                            <span class="work-category">Insta post Edit</span>
+                            <h4 class="work-title">Insta post Edit Professional</h4>
+                             <button class="work-view-btn" onclick="openImageModal('instapost.jpeg', 'Professional Portrait Enhancement')">
+                                <i class="fas fa-expand"></i> View Full Screen
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Photo 2 -->
+                    <div class="work-card">
+                        <img src="poster.jpeg" alt="Instagram Edit" class="work-image" onclick="openImageModal('poster.jpeg', 'Social Media Content Creation')">
+                        <div class="work-info">
+                            <span class="work-category">Instagram Edit</span>
+                            <h4 class="work-title">Social Media Content Creation</h4>
+                            <p class="work-description">Instagram story templates, feed posts, and profile picture optimization.</p>
+                            <button class="work-view-btn" onclick="openImageModal('poster.jpeg', 'Social Media Content Creation')">
+                                <i class="fas fa-expand"></i> View Full Screen
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Photo 3 -->
+                    <div class="work-card">
+                        <img src="poster.jpeg" alt="Frame Edit" class="work-image" onclick="openImageModal('poster.jpeg', 'Custom Frame & Border Design')">
+                        <div class="work-info">
+                            <span class="work-category">Frame Edit</span>
+                            <h4 class="work-title">Custom Frame & Border Design</h4>
+                            <p class="work-description">Creative frame designs with artistic borders and layout compositions.</p>
+                            <button class="work-view-btn" onclick="openImageModal('poster.jpeg', 'Custom Frame & Border Design')">
+                                <i class="fas fa-expand"></i> View Full Screen
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIDEO EDITING SAMPLES -->
+                <h4 class="work-category-title" style="margin-top: 50px;">
+                    <i class="fas fa-video"></i> Video Editing Samples
+                </h4>
+                <div class="work-grid">
+                    <!-- Video 1 - Wedding Reel -->
+                    <div class="work-card">
+                        <div class="video-container" id="videoContainer1">
+                            <video class="video-player" id="video1">
+                                <!-- Replace with your video URL -->
+                                <source src="reels1.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-controls">
+                                <button class="video-play-btn" onclick="togglePlay('video1')">
+                                    <i class="fas fa-play" id="playIcon1"></i>
+                                </button>
+                                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('video1', this.value)">
+                                <span class="video-time" id="time1">0:00 / 0:00</span>
+                                <button class="video-fullscreen" onclick="openFullscreen('video1')">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <span class="work-category">Insta reels Edit</span>
+                            <h4 class="work-title">Insta reels Highlight Reel</h4>
+                            <p class="work-description">Insta reels highlights with smooth transitions and perfect music sync.</p>
+                            <button class="work-view-btn" onclick="playInModal('reels1.mp4')">
+                                <i class="fas fa-expand"></i> Full Screen
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Video 2 - Travel Reel -->
+                    <div class="work-card">
+                        <div class="video-container" id="videoContainer2">
+                            <video class="video-player" id="video2">
+                                <!-- Replace with your video URL -->
+                                <source src="travelvideo.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-controls">
+                                <button class="video-play-btn" onclick="togglePlay('video2')">
+                                    <i class="fas fa-play" id="playIcon2"></i>
+                                </button>
+                                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('video2', this.value)">
+                                <span class="video-time" id="time2">0:00 / 0:00</span>
+                                <button class="video-fullscreen" onclick="openFullscreen('video2')">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <span class="work-category">Travel Edit</span>
+                            <h4 class="work-title">Travel Adventure Reel</h4>
+                            <p class="work-description">Dynamic travel videos with trending effects and energetic pacing.</p>
+                            <button class="work-view-btn" onclick="playInModal('travelvideo.mp4')">
+                                <i class="fas fa-expand"></i> Full Screen
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Video 3 - Product Reel -->
+                    <div class="work-card">
+                        <div class="video-container" id="videoContainer3">
+                            <video class="video-player" id="video3">
+                                <!-- Replace with your video URL -->
+                                <source src="productshowcase.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-controls">
+                                <button class="video-play-btn" onclick="togglePlay('video3')">
+                                    <i class="fas fa-play" id="playIcon3"></i>
+                                </button>
+                                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('video3', this.value)">
+                                <span class="video-time" id="time3">0:00 / 0:00</span>
+                                <button class="video-fullscreen" onclick="openFullscreen('video3')">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <span class="work-category">Product Edit</span>
+                            <h4 class="work-title">Product Showcase Reel</h4>
+                            <p class="work-description">Engaging product videos with smooth animations and attention-grabbing effects.</p>
+                            <button class="work-view-btn" onclick="playInModal('productshowcase.mp4')">
+                                <i class="fas fa-expand"></i> Full Screen
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Video 4 - Creative Reel -->
+                    <div class="work-card">
+                        <div class="video-container" id="videoContainer4">
+                            <video class="video-player" id="video4">
+                                <!-- Replace with your video URL -->
+                                <source src="reels2.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-controls">
+                                <button class="video-play-btn" onclick="togglePlay('video4')">
+                                    <i class="fas fa-play" id="playIcon4"></i>
+                                </button>
+                                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('video4', this.value)">
+                                <span class="video-time" id="time4">0:00 / 0:00</span>
+                                <button class="video-fullscreen" onclick="openFullscreen('video4')">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <span class="work-category">Creative Edit</span>
+                            <h4 class="work-title">Creative Transition Reel</h4>
+                            <p class="work-description">Innovative video transitions and visual effects for social media content.</p>
+                            <button class="work-view-btn" onclick="playInModal('reels2.mp4')">
+                                <i class="fas fa-expand"></i> Full Screen
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Video 5 - Reels Edit -->
+                    <div class="work-card">
+                        <div class="video-container" id="videoContainer5">
+                            <video class="video-player" id="video5">
+                                <!-- Replace with your video URL -->
+                                <source src="reelsedit.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-controls">
+                                <button class="video-play-btn" onclick="togglePlay('video5')">
+                                    <i class="fas fa-play" id="playIcon5"></i>
+                                </button>
+                                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('video5', this.value)">
+                                <span class="video-time" id="time5">0:00 / 0:00</span>
+                                <button class="video-fullscreen" onclick="openFullscreen('video5')">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <span class="work-category">Reels Edit</span>
+                            <h4 class="work-title">Instagram Reels Edit</h4>
+                            <p class="work-description">Trendy Instagram reels with quick cuts, effects, and perfect music timing.</p>
+                            <button class="work-view-btn" onclick="playInModal('reelsedit.mp4')">
+                                <i class="fas fa-expand"></i> Full Screen
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Video 6 - Song Edit -->
+                    <div class="work-card">
+                        <div class="video-container" id="videoContainer6">
+                            <video class="video-player" id="video6">
+                                <!-- Replace with your video URL -->
+                                <source src="songedit.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-controls">
+                                <button class="video-play-btn" onclick="togglePlay('video6')">
+                                    <i class="fas fa-play" id="playIcon6"></i>
+                                </button>
+                                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('video6', this.value)">
+                                <span class="video-time" id="time6">0:00 / 0:00</span>
+                                <button class="video-fullscreen" onclick="openFullscreen('video6')">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <span class="work-category">Song Edit</span>
+                            <h4 class="work-title">Music Video Edit</h4>
+                            <p class="work-description">Music video edits with beat sync, lyric animations, and visual effects.</p>
+                            <button class="work-view-btn" onclick="playInModal('songedit.mp4')">
+                                <i class="fas fa-expand"></i> Full Screen
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Section -->
+                <div style="text-align: center; margin-top: 50px; padding: 30px; background: var(--card-bg); border-radius: 15px;">
+                    <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 22px;">
+                        <i class="fab fa-whatsapp"></i> Want to See More Work Samples?
+                    </h4>
+                    <p style="color: var(--gray); margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        We have hundreds of satisfied clients and a vast portfolio. Contact us on WhatsApp to see more examples of our work!
+                    </p>
+                    <button class="header-btn whatsapp" onclick="openWhatsApp('Hello! I would like to see more work samples from your portfolio.')" style="margin: 0 auto;">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Request More Samples on WhatsApp</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- FOUNDER SECTION -->
+            <section class="founder-section" id="founders">
+                <h3><i class="fas fa-users"></i> Meet Our Team</h3>
+                <div class="founder-grid">
+                    <div class="founder-card">
+                        <img src="founder.png" alt="Founder" class="founder-photo">
+                        <div class="founder-name">Kashif</div>
+                        <div class="founder-role">Founder & Lead Editor</div>
+                        <div class="founder-bio">
+                            With over 6 years of experience in professional editing, Kashif leads our creative team with expertise in both photo and video editing. His attention to detail ensures every project meets the highest quality standards.
+                        </div>
+                        <div class="founder-contact">
+                            <div class="founder-contact-item">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>+91 98940 09166</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="founder-card">
+                        <img src="cofounder.png" alt="Co-Founder" class="founder-photo">
+                        <div class="founder-name">Dhunash</div>
+                        <div class="founder-role">Co-Founder & Creative Director</div>
+                        <div class="founder-bio">
+                            Dhunash brings 5 years of creative direction experience, specializing in wedding and special event editing. His artistic vision transforms ordinary footage into cinematic masterpieces.
+                        </div>
+                        <div class="founder-contact">
+                            <div class="founder-contact-item">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>+91 63743 16098</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-wrapper">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4><i class="fas fa-info-circle"></i> Contact Details</h4>
+                    <div class="contact-details">
+                        <p><i class="fab fa-whatsapp"></i> WhatsApp: +91 98940 09166</p>
+                        <p><i class="fab fa-whatsapp"></i> WhatsApp: +91 63743 16098</p>
+                        <p><i class="fas fa-phone"></i> Call: +91 98940 09166</p>
+                        <p><i class="fas fa-envelope"></i> Email: vipediz15@gmail.com</p>
+                        <p><i class="fas fa-clock"></i> Hours: 10 AM - 10 PM IST</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Based in India</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://wa.me/919894009166" class="social-link" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:vipediz15@gmail.com" class="social-link" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="tel:+919894009166" class="social-link" title="Call">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4><i class="fas fa-camera"></i> Photo Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#pricing"><i class="fas fa-check"></i> Normal Edit - ₹30</a></li>
+                        <li><a href="#pricing"><i class="fas fa-check"></i> Frame Edit - ₹80</a></li>
+                        <li><a href="#pricing"><i class="fas fa-check"></i> Instagram - ₹50</a></li>
+                        <li><a href="#pricing"><i class="fas fa-check"></i> Animation - ₹60</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4><i class="fas fa-video"></i> Video Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#pricing"><i class="fas fa-check"></i> Wedding - ₹80/min</a></li>
+                        <li><a href="#pricing"><i class="fas fa-check"></i> Creative - ₹75/min</a></li>
+                        <li><a href="#pricing"><i class="fas fa-check"></i> Background - ₹60/min</a></li>
+                        <li><a href="#pricing"><i class="fas fa-check"></i> Logo - ₹70/project</a></li>
+                        <li><a href="#pricing"><i class="fas fa-check"></i> Birthday - ₹70/min</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4><i class="fas fa-link"></i> Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#pricing"><i class="fas fa-tags"></i> Pricing</a></li>
+                        <li><a href="#order"><i class="fab fa-whatsapp"></i> WhatsApp Order</a></li>
+                        <li><a href="#previous-work"><i class="fas fa-images"></i> Previous Work</a></li>
+                        <li><a href="#founders"><i class="fas fa-users"></i> Our Team</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright"><p>&copy;2025 All rights reserved by vipedits. Created by <a href="https://prasanth781007.github.io/Newportfolio-/" style="color:red;">Prasanth</a></p></div>
+                <p style="margin-top: 10px; font-size: 12px;">Contact: +91 98940 09166 | +91 63743 16098 | Email: vipediz15@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // CONTACT DETAILS
+        const WHATSAPP_NUMBER = "+919894009166";
+        const EMAIL_ADDRESS = "vipediz15@gmail.com";
+        const PHONE_NUMBER = "+919894009166";
+
+        // DOM Elements
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const verticalMenu = document.getElementById('verticalMenu');
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const imageModalClose = document.getElementById('imageModalClose');
+        const videoModal = document.getElementById('videoModal');
+        const modalVideo = document.getElementById('modalVideo');
+        const videoModalClose = document.getElementById('videoModalClose');
+
+        // Initialize video players
+        const videos = {
+            video1: { element: document.getElementById('video1'), playIcon: document.getElementById('playIcon1'), timeElement: document.getElementById('time1') },
+            video2: { element: document.getElementById('video2'), playIcon: document.getElementById('playIcon2'), timeElement: document.getElementById('time2') },
+            video3: { element: document.getElementById('video3'), playIcon: document.getElementById('playIcon3'), timeElement: document.getElementById('time3') },
+            video4: { element: document.getElementById('video4'), playIcon: document.getElementById('playIcon4'), timeElement: document.getElementById('time4') },
+            video5: { element: document.getElementById('video5'), playIcon: document.getElementById('playIcon5'), timeElement: document.getElementById('time5') },
+            video6: { element: document.getElementById('video6'), playIcon: document.getElementById('playIcon6'), timeElement: document.getElementById('time6') }
+        };
+
+        // Mobile Menu Toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            verticalMenu.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (verticalMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    verticalMenu.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                    mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                }
+            });
+        });
+
+        // Copy to Clipboard Function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification(`Copied: ${text}`);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showNotification(`Copied: ${text}`);
+            });
+        }
+
+        // Show Notification
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Call Phone Number
+        function callNumber(number) {
+            window.location.href = `tel:${number}`;
+        }
+
+        // Open WhatsApp Direct
+        function openWhatsApp(message = "") {
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace('+', '')}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Order Service Function
+        function orderService(serviceName, price) {
+            const message = `Hello vipedits! I want to order:\n\n📌 Service: ${serviceName}\n💰 Price: ${price}\n\nPlease provide more details and let me know how to proceed.`;
+            openWhatsApp(message);
+        }
+
+        // Open Image in Modal (Full Screen)
+        function openImageModal(imageSrc, imageAlt) {
+            modalImage.src = imageSrc;
+            modalImage.alt = imageAlt;
+            imageModal.classList.add('active');
+        }
+
+        // Close Image Modal
+        imageModalClose.addEventListener('click', () => {
+            imageModal.classList.remove('active');
+        });
+
+        // Close image modal when clicking outside
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                imageModal.classList.remove('active');
+            }
+        });
+
+        // Video Control Functions
+        function togglePlay(videoId) {
+            const videoData = videos[videoId];
+            if (videoData.element.paused) {
+                videoData.element.play();
+                videoData.playIcon.classList.remove('fa-play');
+                videoData.playIcon.classList.add('fa-pause');
+            } else {
+                videoData.element.pause();
+                videoData.playIcon.classList.remove('fa-pause');
+                videoData.playIcon.classList.add('fa-play');
+            }
+        }
+
+        function setVolume(videoId, volume) {
+            videos[videoId].element.volume = volume;
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        // Initialize video time displays
+        Object.keys(videos).forEach(videoId => {
+            const videoData = videos[videoId];
+            const video = videoData.element;
+            
+            // Update time display
+            video.addEventListener('timeupdate', () => {
+                videoData.timeElement.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+            });
+            
+            // Reset play icon when video ends
+            video.addEventListener('ended', () => {
+                videoData.playIcon.classList.remove('fa-pause');
+                videoData.playIcon.classList.add('fa-play');
+            });
+            
+            // Play/pause icon update
+            video.addEventListener('play', () => {
+                videoData.playIcon.classList.remove('fa-play');
+                videoData.playIcon.classList.add('fa-pause');
+            });
+            
+            video.addEventListener('pause', () => {
+                videoData.playIcon.classList.remove('fa-pause');
+                videoData.playIcon.classList.add('fa-play');
+            });
+        });
+
+        // Fullscreen function for videos
+        function openFullscreen(videoId) {
+            const video = videos[videoId].element;
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) {
+                video.msRequestFullscreen();
+            }
+        }
+
+        // Play video in modal
+        function playInModal(videoUrl) {
+            modalVideo.src = videoUrl;
+            videoModal.classList.add('active');
+            modalVideo.play();
+            
+            // Ensure close button is clickable
+            videoModalClose.style.zIndex = "1002";
+            videoModalClose.style.pointerEvents = "auto";
+        }
+
+        // Close video modal - FIXED
+        videoModalClose.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent event bubbling
+            videoModal.classList.remove('active');
+            modalVideo.pause();
+            modalVideo.currentTime = 0;
+        });
+
+        // Close video modal when clicking outside
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                videoModal.classList.remove('active');
+                modalVideo.pause();
+                modalVideo.currentTime = 0;
+            }
+        });
+
+        // Close modals with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (imageModal.classList.contains('active')) {
+                    imageModal.classList.remove('active');
+                }
+                if (videoModal.classList.contains('active')) {
+                    videoModal.classList.remove('active');
+                    modalVideo.pause();
+                    modalVideo.currentTime = 0;
+                }
+            }
+        });
+
+        // WhatsApp Order Form Submission
+        document.getElementById('whatsappOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const email = document.getElementById('customerEmail').value;
+            const service = document.getElementById('serviceType').value;
+            const details = document.getElementById('orderDetails').value;
+            
+            // Create WhatsApp message
+            let message = `📋 NEW ORDER REQUEST - VIPEDITS 📋\n\n`;
+            message += `👤 Name: ${name}\n`;
+            message += `📱 Phone: ${phone}\n`;
+            message += `📧 Email: ${email}\n`;
+            message += `🎯 Service: ${service}\n`;
+            message += `📝 Details: ${details}\n\n`;
+            message += `Please confirm my order and let me know the next steps.`;
+            
+            // Open WhatsApp with pre-filled message
+            openWhatsApp(message);
+            
+            // Show success message
+            showNotification(`Opening WhatsApp with your order details!`);
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active nav link
+                    document.querySelectorAll('.nav-links a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Contact item click handlers
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('copy-btn')) {
+                    const textElement = this.querySelector('.contact-text p');
+                    const contactText = textElement.textContent;
+                    copyToClipboard(contactText);
+                }
+            });
+        });
+
+        // Initialize active nav link
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.nav-links a').classList.add('active');
+            
+            // Check screen size and hide mobile menu button on large screens
+            if (window.innerWidth > 768) {
+                document.querySelector('.mobile-menu-bar').style.display = 'none';
+            } else {
+                document.querySelector('.mobile-menu-bar').style.display = 'flex';
+            }
+            
+            // Initialize video durations
+            Object.keys(videos).forEach(videoId => {
+                const video = videos[videoId].element;
+                video.addEventListener('loadedmetadata', () => {
+                    videos[videoId].timeElement.textContent = `0:00 / ${formatTime(video.duration)}`;
+                });
+            });
+        });
+
+        // Auto-scroll to pricing when clicking on price tags
+        document.querySelectorAll('.price').forEach(priceTag => {
+            priceTag.style.cursor = 'pointer';
+            priceTag.addEventListener('click', function() {
+                document.getElementById('order').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            });
+        });
+
+        // Email order function
+        function sendEmailOrder(serviceName, price) {
+            const subject = `Order for ${serviceName}`;
+            const body = `Hello vipedits,\n\nI would like to order ${serviceName} (${price}).\n\nPlease contact me with more details.\n\nThank you!`;
+            window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        // Add email order option to all order buttons
+        document.querySelectorAll('.order-btn').forEach(btn => {
+            btn.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                const card = this.closest('.pricing-card');
+                const serviceName = card.querySelector('.card-title').textContent;
+                const price = card.querySelector('.price').textContent;
+                sendEmailOrder(serviceName, price);
+                showNotification('Opening email to send order!');
+            });
+        });
+
+        // Tooltip for right-click option
+        document.querySelectorAll('.order-btn').forEach(btn => {
+            btn.title = "Left-click: WhatsApp | Right-click: Email";
+        });
+
+        // Window resize handler
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                document.querySelector('.mobile-menu-bar').style.display = 'none';
+                verticalMenu.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            } else {
+                document.querySelector('.mobile-menu-bar').style.display = 'flex';
+            }
+        });
+
+        // Ensure close button is always clickable
+        function ensureCloseButtonClickable() {
+            document.querySelectorAll('.modal-close').forEach(btn => {
+                btn.style.zIndex = "1002";
+                btn.style.pointerEvents = "auto";
+            });
+        }
+
+        // Call this function periodically to ensure buttons work
+        setInterval(ensureCloseButtonClickable, 1000);
+    </script>
+</body>
+</html>
